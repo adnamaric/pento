@@ -12,6 +12,7 @@ defmodule PentoWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :fetch_current_user
+    plug NavigationHistory.Tracker
   end
 
   pipeline :api do
@@ -29,7 +30,7 @@ defmodule PentoWeb.Router do
     post "/users/reset_password", UserResetPasswordController, :create
     get "/users/reset_password/:token", UserResetPasswordController, :edit
     put "/users/reset_password/:token", UserResetPasswordController, :update
-    live "/promo", PromoLive
+  
 
    end
 
@@ -55,8 +56,10 @@ defmodule PentoWeb.Router do
   live_session :default, on_mount: PentoWeb.UserAuthLive do
     live "/guess", WrongLive
     live "/survey", SurveyLive, :index
+    live "/promo", PromoLive
     end
   end
+
   scope "/", PentoWeb do
     pipe_through [:browser, :require_authenticated_user]
 
@@ -107,22 +110,21 @@ defmodule PentoWeb.Router do
   end
   
   scope "/", PentoWeb do
-    pipe_through [:browser, :require_authenticated_admin]
-
+    pipe_through [:browser, :require_authenticated_user ]
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
   end
 
    
- # scope "/", PentoWeb do
- #   pipe_through [:browser, :require_authenticated_admin]
- #   live_session :default, root_layout: {PentoWeb.LayoutView, "admin.html"} do
-  #  live "/game-sales", Admin.GameSalesLive
-  #  live "/survey-results", Admin.SurveyResultsLive
+   scope "/", PentoWeb do
+    pipe_through [:browser, :require_authenticated_admin]
+   
+   live "/game-sales", Admin.GameSalesLive
+    live "/survey-results", Admin.SurveyResultsLive
     # other admin routes
- #   end
-  #  end
+    
+   end
 
   scope "/", PentoWeb do
     pipe_through [:browser]

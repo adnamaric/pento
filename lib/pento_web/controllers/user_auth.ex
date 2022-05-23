@@ -5,6 +5,7 @@ defmodule PentoWeb.UserAuth do
   alias Pento.Accounts
   alias PentoWeb.Router.Helpers, as: Routes
   alias Pento.Accounts.User
+  alias NavigationHistory
   # Make the remember me cookie valid for 60 days.
   # If you want bump or reduce this value, also change
   # the token expiry itself in UserToken.
@@ -83,7 +84,9 @@ defmodule PentoWeb.UserAuth do
     |> delete_resp_cookie(@remember_me_cookie)
     |> redirect(to: "/")
   end
-
+  def redirect_back(conn, opts \\ []) do
+  Phoenix.Controller.redirect(conn, to: NavigationHistory.last_path(conn, 1))
+end
   @doc """
   Authenticates the user by looking into the session
   and remember me token.
@@ -128,10 +131,12 @@ defmodule PentoWeb.UserAuth do
   they use the application at all, here would be a good place.
   """
   def require_authenticated_user(conn, _opts) do
-        
+  
     if conn.assigns[:current_user] do
       conn
-    else
+      |> put_flash( :info, "Welcome.")
+
+   else
       conn
       |> put_flash(:error, "You must log in to access this page.")
       |> maybe_store_return_to()
@@ -140,17 +145,18 @@ defmodule PentoWeb.UserAuth do
     end
   end
   
-  def require_authenticated_admin(conn,opts) do
-    IO.inspect opts
-    if( conn.assigns[:current_user]) do
-      conn
-      
+  def require_authenticated_admin(conn, otps) do
+    current_user = conn.assigns[:current_user]
+    
+    if( "#{current_user.is_admin}" == true ) do
+     {  conn
+          
+    }
     else
       conn
-      |> put_flash(:error, "You don't have privileges to access this page.")
-      |> maybe_store_return_to()
-      |> redirect(to: Routes.user_session_path(conn, :new))
-      |> halt()
+      |> put_flash(:error, "You must have admin privileges to access this page.")
+      |>redirect_back()
+      
     end
   end
 

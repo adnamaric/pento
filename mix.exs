@@ -50,6 +50,7 @@ defmodule Pento.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
+      {:navigation_history, "~> 0.4"},
       {:hackney, "~> 1.9"}
     ]
     end
