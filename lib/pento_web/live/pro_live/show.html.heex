@@ -1,0 +1,21 @@
+<h1>Show Pro</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.pro_show_path(@socket, :show, @pro)}>
+    <.live_component
+      module={PentoWeb.ProLive.FormComponent}
+      id={@pro.id}
+      title={@page_title}
+      action={@live_action}
+      pro={@pro}
+      return_to={Routes.pro_show_path(@socket, :show, @pro)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.pro_show_path(@socket, :edit, @pro), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.pro_index_path(@socket, :index) %></span>

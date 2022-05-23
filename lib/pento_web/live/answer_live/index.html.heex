@@ -1,0 +1,43 @@
+<h1>Listing Answers</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.answer_index_path(@socket, :index)}>
+    <.live_component
+      module={PentoWeb.AnswerLive.FormComponent}
+      id={@answer.id || :new}
+      title={@page_title}
+      action={@live_action}
+      answer={@answer}
+      return_to={Routes.answer_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Answer</th>
+      <th>User</th>
+      <th>Question</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="answers">
+    <%= for answer <- @answers do %>
+      <tr id={"answer-#{answer.id}"}>
+        <td><%= answer.answer %></td>
+        <td><%= answer.user_id %></td>
+        <td><%= answer.question_id %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.answer_show_path(@socket, :show, answer) %></span>
+          <span><%= live_patch "Edit", to: Routes.answer_index_path(@socket, :edit, answer) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: answer.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Answer", to: Routes.answer_index_path(@socket, :new) %></span>

@@ -1,0 +1,37 @@
+<h1>Listing Prod</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.pro_index_path(@socket, :index)}>
+    <.live_component
+      module={PentoWeb.ProLive.FormComponent}
+      id={@pro.id || :new}
+      title={@page_title}
+      action={@live_action}
+      pro={@pro}
+      return_to={Routes.pro_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="prod">
+    <%= for pro <- @prod do %>
+      <tr id={"pro-#{pro.id}"}>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.pro_show_path(@socket, :show, pro) %></span>
+          <span><%= live_patch "Edit", to: Routes.pro_index_path(@socket, :edit, pro) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: pro.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Pro", to: Routes.pro_index_path(@socket, :new) %></span>

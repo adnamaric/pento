@@ -1,0 +1,20 @@
+<section class="row">
+    <h2>Survey</h2>
+</section>
+
+<%= if @demographic do %>
+ <DemographicLive.Show.details demographic={@demographic} />
+ <RatingLive.Index.products products={@products}
+ current_user={@current_user}
+ demographic={@demographic} />
+<% else %>
+ <.live_component module={DemographicLive.Form}
+  id="demographic-form"
+ user={@current_user} />
+<% end %>
+
+<section class="row">
+    <Component.hero content="Hello from a Function Component">
+        <div>Hello from a Function Component's Slot</div>
+    </Component.hero>
+</section>
