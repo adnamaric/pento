@@ -134,7 +134,6 @@ end
   
     if conn.assigns[:current_user] do
       conn
-      |> put_flash( :info, "Welcome.")
 
    else
       conn
@@ -149,13 +148,11 @@ end
     current_user = conn.assigns[:current_user]
     
     if( "#{current_user.is_admin}" == true ) do
-     {  conn
-          
-    }
+      conn
     else
       conn
       |> put_flash(:error, "You must have admin privileges to access this page.")
-      |>redirect_back()
+      |> redirect_back()
       
     end
   end

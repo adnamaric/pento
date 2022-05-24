@@ -30,7 +30,7 @@ defmodule PentoWeb.Router do
     post "/users/reset_password", UserResetPasswordController, :create
     get "/users/reset_password/:token", UserResetPasswordController, :edit
     put "/users/reset_password/:token", UserResetPasswordController, :update
-  
+    get "/login", UserSessionController, :new
 
    end
 
@@ -56,6 +56,7 @@ defmodule PentoWeb.Router do
   live_session :default, on_mount: PentoWeb.UserAuthLive do
     live "/guess", WrongLive
     live "/survey", SurveyLive, :index
+    live "/promo", PromoLive
 
     end
   end
@@ -75,7 +76,6 @@ defmodule PentoWeb.Router do
 
     live "/answers/:id", AnswerLive.Show, :show
     live "/answers/:id/show/edit", AnswerLive.Show, :edit
-    live "/promo", PromoLive
     
   end
   # Other scopes may use custom stacks.
