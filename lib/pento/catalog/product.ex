@@ -1,6 +1,7 @@
 defmodule Pento.Catalog.Product do
   alias Pento.Catalog.Product
   alias Pento.Repo
+  alias Pento.Survey.Rating  
   use Ecto.Schema
   import Ecto.Changeset
 

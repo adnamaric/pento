@@ -7,7 +7,7 @@ defmodule Pento.Catalog do
   alias Pento.Repo
 
   alias Pento.Catalog.Product
-
+  
   @doc """
   Returns the list of products.
 
