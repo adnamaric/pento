@@ -2,6 +2,9 @@ defmodule Pento.Survey.Rating do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Pento.Catalog
+  alias Pento.Accounts
+
   schema "ratings" do
     field :stars, :integer
     belongs_to :user, User

@@ -41,5 +41,6 @@ account = %{
 Pento.Accounts.register_user(account)
 
 Enum.each(products, fn product ->
-   Catalog.create_product(product)
+ #  Catalog.create_product(product)
+   #Pento.Catalog.create_product(product)
 end)

@@ -4,14 +4,14 @@ defmodule PentoWeb.SurveyLive do
     alias __MODULE__.Component
     alias Pento.Survey
     alias PentoWeb.DemographicLive
+    alias DemographicLive.Show
     alias Pento.Catalog
     alias PentoWeb.RatingLive
     alias PentoWeb.Endpoint
-  
+    alias PentoWeb.DemographicLive.Form
     @survey_results_topic "survey_results"
   
     def mount(_params, _session, socket) do
-      IO.inspect(socket.assigns.current_user)
       {:ok,
         socket
         |> assign_demographic()
