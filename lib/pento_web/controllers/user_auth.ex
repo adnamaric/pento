@@ -146,8 +146,8 @@ end
   
   def require_authenticated_admin(conn, otps) do
     current_user = conn.assigns[:current_user]
-    
-    if( "#{current_user.is_admin}" == true ) do
+ 
+    if(current_user.is_admin== true ) do
       conn
     else
       conn

@@ -32,14 +32,22 @@ products = [
 }
 ]
 
-account = %{
+accounts =
+[ %{
     email: "test@test.io",
+    is_admin: true,
+    password: "X5LfaMBkbj3CN9F"
+   },
+   %{
+    email: "test1@test.io",
     is_admin: false,
     password: "X5LfaMBkbj3CN9F"
-}
+   }
+]
 
-Pento.Accounts.register_user(account)
-
+Enum.each(accounts,fn account -> 
+    Pento.Accounts.register_user(account)
+end )
 Enum.each(products, fn product -> 
    Catalog.create_product(product)
 end)
