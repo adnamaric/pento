@@ -17,6 +17,16 @@ defmodule Pento.Catalog do
       [%Product{}, ...]
 
   """
+  def products_with_average_ratings(%{
+    age_group_filter: age_group_filter
+    }) do
+    Product.Query.with_average_ratings()
+    |> Product.Query.join_users()
+    |> Product.Query.join_demographics()
+    |> Product.Query.filter_by_age_group(age_group_filter)
+    |> Repo.all()
+  end
+  
   def list_products_with_user_rating(user) do
     Product.Query.with_user_ratings(user)
     |> Repo.all()
@@ -25,6 +35,12 @@ defmodule Pento.Catalog do
   def list_products do
     Repo.all(Product)
   end
+
+  def products_with_zero_ratings do
+    Product.Query.with_zero_ratings()
+    |> Repo.all()
+  end
+
 
   @doc """
   Gets a single product.

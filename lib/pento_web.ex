@@ -74,7 +74,18 @@ defmodule PentoWeb do
       import PentoWeb.Gettext
     end
   end
-
+  defp chart_helpers do
+    quote do
+      # Import custom chart functionality
+      import PentoWeb.BarChart
+      import PentoWeb.ScatterPlotChart
+    end
+  end
+  def chart_live do
+    quote do
+      unquote(chart_helpers())
+    end
+  end
   defp view_helpers do
     quote do
       # Use all HTML functionality (forms, tags, etc)
@@ -92,7 +103,7 @@ defmodule PentoWeb do
       alias PentoWeb.Router.Helpers, as: Routes
     end
   end
-
+ 
   @doc """
   When used, dispatch to the appropriate controller/view/etc.
   """

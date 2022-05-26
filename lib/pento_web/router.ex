@@ -77,6 +77,8 @@ defmodule PentoWeb.Router do
     live "/answers/:id", AnswerLive.Show, :show
     live "/answers/:id/show/edit", AnswerLive.Show, :edit
     
+    live "/admin-dashboard", Admin.DashboardLive
+
   end
   # Other scopes may use custom stacks.
   # scope "/api", PentoWeb do

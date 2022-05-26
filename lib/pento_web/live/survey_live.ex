@@ -7,11 +7,10 @@ defmodule PentoWeb.SurveyLive do
   alias Pento.Catalog
   alias PentoWeb.RatingLive
   alias PentoWeb.Endpoint
-
+ 
   @survey_results_topic "survey_results"
 
   def mount(_params, _session, socket) do
-    IO.inspect(socket.assigns.current_user)
     {:ok,
       socket
       |> assign_demographic()

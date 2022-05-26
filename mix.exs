@@ -51,7 +51,8 @@ defmodule Pento.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:navigation_history, "~> 0.4"},
-      {:hackney, "~> 1.9"}
+      {:hackney, "~> 1.9"},
+      {:contex, "~> 0.4.0"}
     ]
     end
 
