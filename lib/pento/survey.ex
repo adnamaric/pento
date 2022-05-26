@@ -7,7 +7,7 @@ defmodule Pento.Survey do
   alias Pento.Repo
 
   alias Pento.Survey.Demographic
-
+  alias Pento.Survey.Rating
   @doc """
   Returns the list of demographics.
 

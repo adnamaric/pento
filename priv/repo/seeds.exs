@@ -10,8 +10,7 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-alias Pento.Catalog
-alias Pento.Accounts
+
 products = [
 %{
     name: "Chess",
@@ -44,10 +43,67 @@ accounts =
     password: "X5LfaMBkbj3CN9F"
    }
 ]
-
+demographics = [
+    %{       
+        gender: "female",
+        id: 1,
+        user_id: 1,
+        year_of_birth: 1997
+    },
+    %{       
+        gender: "male",
+        id: 2,
+        user_id: 2,
+        year_of_birth: 1998
+    }
+]
+ratings = [
+    %{
+        id: 1,
+        product_id: 1,
+        stars: 3,
+        user_id: 1
+    },
+    %{
+        id: 2,
+        product_id: 2,
+        stars: 4,
+        user_id: 1
+    },
+    %{
+        id: 3,
+        product_id: 3,
+        stars: 4,
+        user_id: 1
+    },
+    %{
+        id: 4,
+        product_id: 1,
+        stars: 4,
+        user_id: 2
+    },
+    %{
+        id: 5,
+        product_id: 2,
+        stars: 2,
+        user_id: 2
+    },
+    %{
+        id: 6,
+        product_id: 3,
+        stars: 5,
+        user_id: 2
+    },
+]
 Enum.each(accounts,fn account -> 
     Pento.Accounts.register_user(account)
 end )
 Enum.each(products, fn product -> 
-   Catalog.create_product(product)
+   Pento.Catalog.create_product(product)
+end)
+Enum.each(demographics, fn demographic -> 
+    Pento.Survey.create_demographic(demographic)
+ end)
+Enum.each(ratings, fn rating -> 
+ Pento.Survey.create_rating(rating)
 end)
