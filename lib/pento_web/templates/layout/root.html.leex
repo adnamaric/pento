@@ -19,13 +19,15 @@
               <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
             <%= if @current_user do %>
             <li><%= @current_user.email %></li>
+          
             <li><%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %></li>
-           <li data-method="get" data-to="/admin-dashboard" style="color:#0069d9">Switch to admin</li>
+            <li><%= if @current_user.is_admin == true do%></li>
+           <li type="link" data-method="get" data-to="/admin-dashboard" style="color:#0069d9;cursor: pointer">Switch to admin</li>
+            <% end %>
             <li><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
           <% else %>
           <li><%= link "Register", to: Routes.user_registration_path(@conn, :new) %></li>
          <li><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
-          
           <% end %>
             <% end %>
           </ul>
