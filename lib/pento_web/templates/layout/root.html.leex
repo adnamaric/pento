@@ -20,13 +20,17 @@
             <%= if @current_user do %>
             <li><%= @current_user.email %></li>
             <li><%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %></li>
+           <li data-method="get" data-to="/admin-dashboard" style="color:#0069d9">Switch to admin</li>
             <li><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
           <% else %>
           <li><%= link "Register", to: Routes.user_registration_path(@conn, :new) %></li>
          <li><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
+          
           <% end %>
             <% end %>
           </ul>
+
+       
         </nav>
         <a href="https://phoenixframework.org/" class="phx-logo">
           <img src="<%= Routes.static_path(@conn, "/images/phoenix.png") %>" alt="Phoenix Framework Logo"/>

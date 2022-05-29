@@ -57,7 +57,7 @@ defmodule PentoWeb.Router do
     live "/guess", WrongLive
     live "/survey", SurveyLive, :index
     live "/promo", PromoLive
-
+    live "/products/:id", ProductLive.Show, :show
     end
   end
 

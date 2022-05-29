@@ -8,7 +8,11 @@ defmodule PentoWeb.Admin.DashboardLive do
  
     
     def mount(_params, _session, socket) do
-    
+      if connected?(socket) do
+        Endpoint.subscribe(@survey_results_topic)
+        Endpoint.subscribe(@user_activity_topic)
+        
+      end
       {:ok,
        socket
        |> assign(:survey_results_component_id, "survey-results")
