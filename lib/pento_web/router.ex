@@ -31,6 +31,7 @@ defmodule PentoWeb.Router do
     get "/users/reset_password/:token", UserResetPasswordController, :edit
     put "/users/reset_password/:token", UserResetPasswordController, :update
     get "/login", UserSessionController, :new
+    live "/game/:puzzle", Pento.GameLive
 
    end
 
